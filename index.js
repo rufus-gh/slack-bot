@@ -33,7 +33,7 @@ app.command("/url-tools-help", async ({ command, ack, respond }) => {
         text: {
           type: "mrkdwn",
           text:
-            `*Available Commands*
+            `*APPLEAvailable Commands*
 
 • */url-tools-ping*
 Check the bot's latency.
@@ -58,17 +58,11 @@ app.command("/url-tools-shorten", async ({ command, ack, respond }) => {
   try {
 
     const { data } = await axios.get(
-      "https://is.gd/create.php",
-      {
-        params: {
-          format: "simple",
-          url: command.text
-        }
-      }
+      `https://qrystal-ten.vercel.app/shorten/${encodeURIComponent(command.text)}`
     );
 
     await respond({
-      text: `Shortened url for ${command.text}: ${data}`
+      text: `Shortened url for ${command.text}: ${data.shortUrl}`
     });
 
   } catch {
